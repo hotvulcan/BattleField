@@ -1,0 +1,60 @@
+version: "3"
+services:
+  ruby_with_sassc:
+    image: ruby_with_sassc:latest
+    container_name: ruby_with_sassc
+    build:
+      context: ./
+      dockerfile: ./BattleField/Dockerfile.base_gems
+
+  web_server:
+    image: battle_field_web_server
+    container_name: battle_field_web_server
+    depends_on: 
+      - db
+    volumes:
+      - ./BattleField:/myapp 
+    ports:
+      - 3000:3000
+    build:
+      context: ./BattleField/
+      dockerfile: ./Dockerfile
+
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: good_password
+
+  web_adele:
+    image: battle_field_web_server
+    volumes:
+      - ./adele:/myapp
+    ports:
+      - "3001:3000"
+    depends_on:
+      - db
+  
+  web_oscar:
+    image: battle_field_web_server
+    volumes:
+      - ./oscar:/myapp
+    ports:
+      - "3002:3000"
+    depends_on:
+      - db
+  
+  web_steven:
+    image: battle_field_web_server
+    volumes:
+      - ./steven:/myapp
+    ports:
+      - "3003:3000"
+    depends_on:
+      - db  
+    # build: 
+    #   context: ./ 
+      
+    # command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+

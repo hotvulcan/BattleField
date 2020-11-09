@@ -1,0 +1,6 @@
+FROM ruby
+RUN apt-get update -qq && apt-get install -y apt-utils nodejs npm postgresql-client libsqlite3-dev zlibc zlib1g zlib1g-dev gcc g++ && gem install sassc --version "2.4.0" && npm install --global yarn &&  mkdir /myapp 
+WORKDIR /myapp
+COPY Gemfile* /myapp/
+RUN bundle install
+
