@@ -1,20 +1,20 @@
 version: "3"
 services:
-  db:
-    image: postgres
-    container_name: db
+  # db:
+  #   image: postgres
+  #   container_name: db
 
-    volumes:
-      - ./database:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: good_password
+  #   volumes:
+  #     - ./database:/var/lib/postgresql/data
+  #   environment:
+  #     POSTGRES_PASSWORD: good_password
 
-  ruby_with_sassc:
-    image: ruby_with_sassc:latest
-    container_name: ruby_with_sassc
-    build:
-      context: ./
-      dockerfile: ./BattleField/Dockerfile.base_gems
+  # ruby_with_sassc:
+  #   image: ruby_with_sassc:latest
+  #   container_name: ruby_with_sassc
+  #   build:
+  #     context: ./
+  #     dockerfile: ./BattleField/Dockerfile.base_gems
 
   web_server:
     image: battle_field_web_server
@@ -25,20 +25,20 @@ services:
       - /home/docker/work/BattleField:/myapp 
     ports:
       - 3000:3000
-    environment:
-      db_host:            db
-    environment:
-      db_user_name:       postgres
-    environment:
-      db_password:        good_password
-    environment:
-      database_name_dev:  battle_field_dev
-    environment:
-      database_name_test: battle_field_test
-    environment:
-      database_name:      battle_field
-    environment:
-      RAILS_MAX_THREADS:  5 
+    # environment:
+    #   db_host:            db
+    # environment:
+    #   db_user_name:       postgres
+    # environment:
+    #   db_password:        good_password
+    # environment:
+    #   database_name_dev:  battle_field_dev
+    # environment:
+    #   database_name_test: battle_field_test
+    # environment:
+    #   database_name:      battle_field
+    # environment:
+    #   RAILS_MAX_THREADS:  5 
 
     build:
       context: ./BattleField/
