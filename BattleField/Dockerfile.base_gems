@@ -1,0 +1,7 @@
+FROM ruby
+RUN apt-get update -qq && apt -y upgrade && apt install -y apt-utils
+RUN apt-get install -y npm nodejs postgresql-client libsqlite3-dev zlibc zlib1g zlib1g-dev gcc g++ && npm install npm@latest -g && npm update && npm upgrade && gem install sassc --version "2.4.0" && npm install --global yarn &&  mkdir /myapp 
+WORKDIR /myapp
+COPY ./BattleField/Gemfile* /myapp/
+RUN bundle install &&  yarn install --check-files
+
