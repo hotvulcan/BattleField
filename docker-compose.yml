@@ -19,8 +19,8 @@ services:
   web_server:
     image: battle_field_web_server
     container_name: battle_field_web_server
-    depends_on: 
-      - db
+    # depends_on: 
+    #   - db
     volumes:
       - /home/docker/work/BattleField:/myapp 
     ports:
@@ -50,8 +50,8 @@ services:
       - /home/adele/work/BattleField:/myapp
     ports:
       - 3001:3000
-    depends_on:
-      - db
+    # depends_on:
+    #   - db
   
   web_oscar:
     image: battle_field_web_server
@@ -59,8 +59,8 @@ services:
       - ./oscar:/myapp
     ports:
       - 3002:3000
-    depends_on:
-      - db
+    # depends_on:
+    #   - db
   
   web_steven:
     image: battle_field_web_server
@@ -68,9 +68,9 @@ services:
       - ./steven:/myapp
     ports:
       - 3003:3000
-    depends_on:
-      - db  
-    # build: 
+    # depends_on:
+    #   - db  
+    # # build: 
     #   context: ./ 
       
     # command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
